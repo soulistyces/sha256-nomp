@@ -1,0 +1,56 @@
+{
+  "logLevel": "debug",
+  "logColors": true,
+  "logDir": "logs",
+  "cliPort": 17117,
+  "clustering": {
+    "enabled": true,
+    "forks": "auto"
+  },
+
+  "defaultPoolConfigs": {
+    "blockRefreshInterval": 10000,
+    "jobRebroadcastTimeout": 50,
+    "connectionTimeout": 600,
+    "emitInvalidBlockHashes": false,
+    "validateWorkerUsername": true,
+    "tcpProxyProtocol": false,
+    "asicboost": true,
+    "banning": {
+      "enabled": true,
+      "time": 300,
+      "invalidPercent": 50,
+      "checkThreshold": 500,
+      "purgeInterval": 300
+    },
+    "redis": {
+      "host": "127.0.0.1",
+      "port": 6379,
+      "password": ""
+    }
+  },
+  "website": {
+    "enabled": true,
+    "host": "0.0.0.0",
+    "port": 80,
+    "stratumHost": "yourpool.com",
+    "stats": {
+      "updateInterval": 30,
+      "historicalRetention": 28800,
+      "hashrateWindow": 600
+    },
+    "adminCenter": {
+      "enabled": true,
+      "passwordHash": "generate_your_password_hash"
+    },
+    "tlsOptions": {
+      "enabled": false,
+      "key": "",
+      "cert": ""
+    }
+  },
+  "redis": {
+    "host": "127.0.0.1",
+    "port": 6379
+  }
+}
