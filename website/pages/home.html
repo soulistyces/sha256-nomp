@@ -1,0 +1,541 @@
+<style>
+    /* Home Page Specific Styles */
+    .hero {
+        background: var(--bg-card);
+        border-radius: 1.5rem;
+        padding: 3rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--card-shadow);
+        border: 1px solid var(--border);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+        filter: blur(60px);
+        opacity: 0.5;
+    }
+
+    .hero-content {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+    }
+
+    .hero-text h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+		text-align: center;
+    }
+
+    .hero-features {
+        list-style: none;
+        margin-top: 2rem;
+    }
+
+    .hero-features li {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.75rem 0;
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+    }
+
+    .hero-features i {
+        color: var(--success);
+        font-size: 1.2rem;
+    }
+
+    .hero-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .hero-logo img {
+        max-width: 100%;
+        height: auto;
+        filter: drop-shadow(0 10px 30px rgba(59, 130, 246, 0.3));
+        animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+    }
+
+    /* Ticker */
+    .ticker-container {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        border-radius: 1rem;
+        padding: 1rem;
+        margin-bottom: 2rem;
+        border: 1px solid var(--border);
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .ticker-container::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 1rem;
+        z-index: 0;
+    }
+    
+    .ticker-container > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .stats-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    @media (max-width: 768px) {
+        .stats-row {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .stat-card {
+        background: var(--bg-card);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        border: 1px solid var(--border);
+        box-shadow: var(--card-shadow);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+        border-color: var(--accent);
+    }
+
+    .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--gradient);
+    }
+
+    .stat-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .stat-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+
+    .stat-icon {
+        width: 40px;
+        height: 40px;
+        background: rgba(59, 130, 246, 0.1);
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+    }
+
+    .stat-content {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .stat-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .stat-item:last-child {
+        border-bottom: none;
+    }
+
+    .stat-label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+    }
+
+    .stat-value {
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 1rem;
+    }
+
+    .stat-value .sub-value {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        font-weight: 400;
+        margin-left: 0.5rem;
+    }
+
+    /* Network Stats Cards */
+    .network-stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .market-section {
+        margin-top: 1.5rem;
+        border-top: 1px solid var(--border);
+        padding-top: 1rem;
+    }
+
+    .market-header {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .market-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: background 0.3s ease;
+    }
+
+    .market-row:hover {
+        background: rgba(59, 130, 246, 0.05);
+    }
+
+    .market-name {
+        font-weight: 500;
+        color: var(--text-secondary);
+    }
+
+    .market-link a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .market-link a:hover {
+        color: var(--accent-hover);
+        text-decoration: underline;
+    }
+
+    .pulse {
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .hero-content {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+
+        .hero {
+            padding: 2rem 1.5rem;
+        }
+
+        .hero-text h1 {
+            font-size: 2rem;
+        }
+
+        .stats-grid,
+        .network-stats-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+{{ function capitalizeFirstLetter(t){return t.charAt(0).toUpperCase()+t.slice(1)} }}
+{{ function readableDate(a){ return new Date(parseInt(a)).toString(); } }}
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1>Welcome to UG Mining Pool</h1>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2rem; text-align: center;">
+                Professional mining pool with low fees, reliable payouts, and 24/7 uptime
+            </p>
+            <ul class="hero-features">
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span><strong>Payment Method:</strong> PROP & SOLO</span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span><strong>Payment Interval:</strong> Every Hour</span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span><strong>Low Fees:</strong> Pool & Solo Mining</span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span><strong>24/7 Support:</strong> Discord & Email</span>
+                </li>
+            </ul>
+        </div>
+        <div class="hero-logo">
+            <img src="/static/logo.gif" alt="Pool Logo" style="max-width: 300px;">
+        </div>
+    </div>
+</section>
+
+<!-- Main Stats Grid -->
+<div class="stats-grid">
+    
+    <!-- Row 1: Global Pool Stats (Full Width) -->
+    <div class="stat-card">
+        <div class="stat-header">
+            <h3 class="stat-title">Global Pool Stats</h3>
+            <div class="stat-icon">
+                <i class="fas fa-globe"></i>
+            </div>
+        </div>
+        <div class="stat-content" style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+            {{ for(var algo in it.stats.algos) { }}
+            <div style="flex: 1; min-width: 200px; padding: 0 1rem;">
+                <div class="stat-item">
+                    <span class="stat-label">
+                        <i class="fas fa-flask"></i>
+                        Algorithm
+                    </span>
+                    <span class="stat-value">{{=capitalizeFirstLetter(algo)}}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">
+                        <i class="fas fa-users"></i>
+                        Miners
+                    </span>
+                    <span class="stat-value pulse" id="statsGlobalMiners">
+                        {{=it.stats.global.miners || 0}}
+                    </span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">
+                        <i class="fas fa-microchip"></i>
+                        Workers
+                    </span>
+                    <span class="stat-value pulse" id="statsGlobalWorkers">{{=it.stats.global.workers || 0}}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Hashrate
+                    </span>
+                    <span class="stat-value pulse" id="statsGlobalHashrate">{{=it.stats.global.hashrateString || '0 H/s'}}</span>
+                </div>
+            </div>
+            {{ } }}
+        </div>
+    </div>
+
+    <!-- Row 2: Individual Pools/Coins -->
+    <div class="stats-row">
+        {{ for(var pool in it.stats.pools) { }}
+        <div class="stat-card">
+            <div class="stat-header">
+                <h3 class="stat-title">{{=capitalizeFirstLetter(pool)}} Pool</h3>
+                <div class="stat-icon">
+                    <i class="fas fa-coins"></i>
+                </div>
+            </div>
+            <div class="stat-content">
+                <div class="stat-item">
+                    <span class="stat-label">
+                        <i class="fas fa-users"></i>
+                        Miners
+                    </span>
+                    <span class="stat-value pulse" id="statsMiners{{=pool}}">
+                        {{=it.stats.pools[pool].minerCount || 0}}
+                        {{ if(it.stats.pools[pool].soloMining) { }}
+                        <span class="sub-value">({{=it.stats.pools[pool].poolMinerCount || 0}} pool / {{=it.stats.pools[pool].soloMinerCount || 0}} solo)</span>
+                        {{ } }}
+                    </span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">
+                        <i class="fas fa-microchip"></i>
+                        Workers
+                    </span>
+                    <span class="stat-value pulse" id="statsWorkers{{=pool}}">
+                        {{=it.stats.pools[pool].workerCount || 0}}
+                        {{ if(it.stats.pools[pool].soloMining) { }}
+                        <span class="sub-value">({{=it.stats.pools[pool].poolWorkerCount || 0}} / {{=it.stats.pools[pool].soloWorkerCount || 0}})</span>
+                        {{ } }}
+                    </span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Hashrate
+                    </span>
+                    <span class="stat-value pulse" id="statsHashrate{{=pool}}">{{=it.stats.pools[pool].hashrateString || '0 H/s'}}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">
+                        <i class="fas fa-percentage"></i>
+                        Pool / Solo Fee
+                    </span>
+                    <span class="stat-value">{{=it.stats.pools[pool].poolFee || 0}}% / {{=it.stats.pools[pool].soloFee || 0}}%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">
+                        <i class="fas fa-wallet"></i>
+                        Min Payout
+                    </span>
+                    <span class="stat-value">{{=it.stats.pools[pool].minimumPayment || 0}}</span>
+                </div>
+            </div>
+        </div>
+        {{ } }}
+    </div>
+</div>
+
+<!-- Price Ticker (Moved to Bottom) -->
+<div class="ticker-container">
+    <script src="https://widgets.coingecko.com/gecko-coin-price-marquee-widget.js"></script>
+    <gecko-coin-price-marquee-widget 
+        locale="en" 
+        outlined="true" 
+        transparent-background="true" 
+        coin-ids="bitcoin,ethereum,bitcoin-cash,binancecoin,litecoin,tether,usd-coin,digibyte,dogecoin,floki,bonk,shiba-inu,pepe" 
+        initial-currency="usd">
+    </gecko-coin-price-marquee-widget>
+</div>
+
+<script>
+    // Helper functions
+function getReadableHashRateString(hashrate) {
+    hashrate = parseFloat(hashrate) * 1000000;
+    if (isNaN(hashrate) || hashrate < 1000000) {
+        return '0 H/s';
+    }
+    var byteUnits = [' H/s', ' KH/s', ' MH/s', ' GH/s', ' TH/s', ' PH/s', ' EH/s', ' ZH/s', ' YH/s'];
+    var i = Math.floor((Math.log(hashrate / 1000) / Math.log(1000)) - 1);
+    hashrate = (hashrate / 1000) / Math.pow(1000, i + 1);
+    return hashrate.toFixed(2) + byteUnits[i];
+}
+       
+    function capitalizeFirstLetter(str) {
+        if (!str) return '';
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    // Initialize live stats
+    function initLiveStats() {
+        if (window.statsSource) {
+            window.statsSource.close();
+        }
+        
+        window.statsSource = new EventSource("/api/live_stats");
+        
+        statsSource.addEventListener('message', function(e) {
+            if (document.hidden) return;
+            
+            try {
+                const stats = JSON.parse(e.data);
+                
+                // Update global stats
+                if (stats.global) {
+                    $('#statsGlobalMiners').html(
+                        `${stats.global.miners || 0}`
+                    );
+                    $('#statsGlobalWorkers').text(stats.global.workers || 0);
+                    $('#statsGlobalHashrate').text(stats.global.hashrateString || '0 H/s');
+                }
+                
+                // Update pool stats
+                for (let pool in stats.pools) {
+                    const poolData = stats.pools[pool];
+                    
+                    // Update miner counts
+                    if (poolData.soloMining) {
+                        $('#statsMiners' + pool).html(
+                            `${poolData.minerCount || 0}<span class="sub-value">(${poolData.poolMinerCount || 0} pool / ${poolData.soloMinerCount || 0} solo)</span>`
+                        );
+                        $('#statsWorkers' + pool).html(
+                            `${poolData.workerCount || 0}<span class="sub-value">(${poolData.poolWorkerCount || 0} pool / ${poolData.soloWorkerCount || 0} solo)</span>`
+                        );
+                    } else {
+                        $('#statsMiners' + pool).text(poolData.minerCount || 0);
+                        $('#statsWorkers' + pool).text(poolData.workerCount || 0);
+                    }
+                    
+                    $('#statsHashrate' + pool).text(poolData.hashrateString || '0 H/s');
+                    
+                    // Update network stats if they exist
+                    if (poolData.poolStats) {
+                        $('#statsNetworkBlocks_' + pool).text(poolData.poolStats.networkBlocks || 0);
+                        $('#statsnetworkHash_' + pool).text(poolData.poolStats.networkHashString || getReadableHashRateString(poolData.poolStats.networkHash || 0));
+                        $('#statsNetworkDiff_' + pool).text(getReadableDifficultyString(poolData.poolStats.networkDiff || 0));
+                        $('#statsNetworkConnections_' + pool).text(poolData.poolStats.networkConnections || 0);
+                        $('#statsNetworkVersion_' + pool).text(poolData.poolStats.networkVersion || 'N/A');
+                    }
+                }
+            } catch (err) {
+                console.error('Error parsing stats:', err);
+            }
+        });
+        
+        statsSource.addEventListener('error', function(e) {
+            console.error('EventSource error:', e);
+            setTimeout(initLiveStats, 5000);
+        });
+    }
+    
+    // Initialize on load
+    $(function() {
+        initLiveStats();
+    });
+</script>
